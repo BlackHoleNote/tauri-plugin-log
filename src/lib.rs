@@ -306,7 +306,8 @@ impl Builder {
                             .into()
                         }
                         LogTarget::LogDir => {
-                            let path = app_handle.path_resolver().app_log_dir().unwrap();
+                            let date = Local::now().to_string().replace(" ", "_");
+                            let path = app_handle.path_resolver().app_log_dir().unwrap().join(date);
                             if !path.exists() {
                                 fs::create_dir_all(&path).unwrap();
                             }
